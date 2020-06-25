@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::
     prefix('admin')
@@ -30,3 +30,5 @@ Route::
         Route::resource('homeSlider', 'HomeSliderController');
         Route::resource('time', 'TimeController');
     });
+
+Route::get('/{vue_capture?}', function () { return view('index'); })->where('vue_capture', '[\/\w\.-]*');
