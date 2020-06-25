@@ -24,6 +24,9 @@ class CreateSchedulesTable extends Migration
             $table->time('time')->nullable();
             $table->bigInteger('epoch');
             $table->timestamps();
+
+            $table->foreign('city_id')->references('id')->on('cities');
+            $table->foreign('time_id')->references('id')->on('times');
         });
     }
 

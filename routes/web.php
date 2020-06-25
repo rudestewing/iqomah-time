@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,13 +20,19 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('generate', function() {
+    Artisan::call('generate-schedule');
+});
 
 Route::
     prefix('admin')
-    ->namespace('admin')
+    ->namespace('Admin')
     ->middleware('auth')
+    ->as('admin.')
     ->group(function() {
+        Route::get('/home', 'HomeController@index')->name('home');
         Route::resource('settingBackground', 'SettingBackgroundController');
         Route::resource('homeSlider', 'HomeSliderController');
         Route::resource('time', 'TimeController');
