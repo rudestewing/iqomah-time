@@ -1,11 +1,10 @@
 <?php
 
-namespace App;
+namespace {{ namespace }};
 
 use Illuminate\Database\Eloquent\Model;
 
-class SettingBackground extends Model
+class {{ class }} extends Model
 {
     protected $guarded = [];
-    
 }
