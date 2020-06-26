@@ -33,6 +33,7 @@ class HomeSliderController extends Controller
             'image_path' => $request->file('image')->store('/', 'public'),
         ]);
 
+        return redirect()->route('admin.homeSlider.index');
         return redirect()->back()->with('success', 'berhasil menambahkan data');
     }
 
