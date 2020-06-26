@@ -145,13 +145,13 @@ class GenerateSchedule extends Command
                 'month' => $data->month,
                 'date' => $data->date,
                 'city_id' => 1,
-                'time_id' => 5,
+                'time_id' => 6,
                 'time' => $time,
                 'epoch' => $epoch,
                 'data' => json_encode($data)
             ]);
 
-            $time = $data->isya;
+            $time = $data->isha;
 
             $this->info('creating isya');
 
@@ -161,7 +161,7 @@ class GenerateSchedule extends Command
                 'month' => $data->month,
                 'date' => $data->date,
                 'city_id' => 1,
-                'time_id' => 5,
+                'time_id' => 7,
                 'time' => $time,
                 'epoch' => $epoch,
                 'data' => json_encode($data)
