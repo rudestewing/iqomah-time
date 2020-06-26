@@ -1,9 +1,9 @@
 <template>
-    <div class=" tw-p-4 tw-bg-green-700 tw-shadow-md tw-text-gray-100 tw-rounded-lg">
-        <p class=" tw-text-4xl tw-font-bold tw-leading-6 tw-tracking-wider">
+    <div class="tw-p-8 tw-bg-green-700 tw-shadow-md tw-text-gray-100 tw-rounded-lg">
+        <p class=" tw-mb-0 tw-font-bold tw-leading-6 tw-tracking-wider tw-text-5xl">
             IQOMAH
         </p>
-        <p class=" tw-text-6xl tw-font-bold">
+        <p class="tw-mb-0 tw-text-6xl tw-font-bold">
             {{countdownString}}
         </p>
         <!-- <p>

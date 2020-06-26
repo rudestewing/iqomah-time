@@ -2305,14 +2305,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
 
       var self = this;
-      var data = Array.from(this.todayScheduleTimes).find(function (item, index) {
+      var data = Array.from(this.todayScheduleTimes).reverse().find(function (item, index) {
         return self.currentTimestamp >= item.epoch;
       });
 
       if (data) {
-        var gap = this.currentTimestamp - data.epoch;
-        console.log(data.epoch + this.spareIqomah);
-        var distance = data.epoch + this.spareIqomah - this.currentTimestamp; // console.log('distance', distance);
+        var distance = data.epoch + this.spareIqomah - this.currentTimestamp;
+        console.log('distance', distance);
 
         if (distance > 0 && data.time.is_iqomah == 1) {
           this.isIqomah = true;
@@ -25774,19 +25773,19 @@ var render = function() {
     "div",
     {
       staticClass:
-        " tw-p-4 tw-bg-green-700 tw-shadow-md tw-text-gray-100 tw-rounded-lg"
+        "tw-p-8 tw-bg-green-700 tw-shadow-md tw-text-gray-100 tw-rounded-lg"
     },
     [
       _c(
         "p",
         {
           staticClass:
-            " tw-text-4xl tw-font-bold tw-leading-6 tw-tracking-wider"
+            " tw-mb-0 tw-font-bold tw-leading-6 tw-tracking-wider tw-text-5xl"
         },
         [_vm._v("\n        IQOMAH\n    ")]
       ),
       _vm._v(" "),
-      _c("p", { staticClass: " tw-text-6xl tw-font-bold" }, [
+      _c("p", { staticClass: "tw-mb-0 tw-text-6xl tw-font-bold" }, [
         _vm._v("\n        " + _vm._s(_vm.countdownString) + "\n    ")
       ])
     ]

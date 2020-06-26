@@ -200,16 +200,14 @@ export default {
             
             var self = this;
 
-            var data =  Array.from(this.todayScheduleTimes).find((item, index) => {
+            var data =  Array.from(this.todayScheduleTimes).reverse().find((item, index) => {
                 return self.currentTimestamp >= item.epoch;
             });
 
             if(data) {
-                var gap = this.currentTimestamp - data.epoch;
                 
-                console.log(data.epoch + this.spareIqomah);
                 var distance = (data.epoch + this.spareIqomah) - this.currentTimestamp;
-                // console.log('distance', distance);
+                console.log('distance', distance);
 
                 if(distance > 0 && data.time.is_iqomah == 1) {
                     this.isIqomah = true;
