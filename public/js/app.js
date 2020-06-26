@@ -2105,6 +2105,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2308,11 +2309,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (data) {
         var distance = data.epoch + this.spareIqomah - this.currentTimestamp;
-        console.log('distance', distance);
 
         if (distance > 0 && data.time.is_iqomah == 1) {
           this.isIqomah = true;
           this.iqomahDistance = distance;
+
+          if (distance <= this.spareAlert) {
+            console.log('play');
+            this.playIqomahAlertSound();
+          }
         } else {
           this.isIqomah = false;
         }
@@ -2334,6 +2339,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       console.log('service restart');
       this.stopCounting();
       this.startService();
+    },
+    playIqomahAlertSound: function playIqomahAlertSound() {
+      new Audio('/sounds/beep.mp3').play(); // console.log('play alert sound');
+      // this.$refs.audioElement.play();
     }
   },
   mounted: function mounted() {
@@ -25743,7 +25752,9 @@ var render = function() {
             )
           ]
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _c("audio", { ref: "audioElement", attrs: { src: "/sounds/beep.mp3" } })
     ],
     1
   )

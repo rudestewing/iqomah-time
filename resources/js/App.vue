@@ -53,6 +53,7 @@
                 </div>
             </div>
         </component>
+        <audio src="/sounds/beep.mp3" ref="audioElement"></audio>
     </div>
 </template>
 
@@ -202,13 +203,17 @@ export default {
             });
 
             if(data) {
-                
                 var distance = (data.epoch + this.spareIqomah) - this.currentTimestamp;
-                console.log('distance', distance);
 
                 if(distance > 0 && data.time.is_iqomah == 1) {
                     this.isIqomah = true;
                     this.iqomahDistance = distance;
+                    
+                    if(distance <= this.spareAlert) {
+                        console.log('play');
+                        this.playIqomahAlertSound();
+                    }
+                    
                 } else {
                     this.isIqomah = false;
                 }
@@ -234,6 +239,12 @@ export default {
             console.log('service restart');
             this.stopCounting();
             this.startService();
+        },
+
+        playIqomahAlertSound() {
+            new Audio('/sounds/beep.mp3').play();
+            // console.log('play alert sound');
+            // this.$refs.audioElement.play();
         }
     },
 
