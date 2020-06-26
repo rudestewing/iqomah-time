@@ -5,10 +5,10 @@
         <component :is="`app-layout-default`">
             <div class="tw-py-5 tw-z-10">
                 <div class="tw-bg-gray-200 tw-bg-opacity-50 tw-rounded-lg">
-                    <div class="tw-flex">
-                        <div class="tw-w-full tw-p-5 md:tw-w-7/12">
+                    <div class="tw-flex tw-flex-wrap">
+                        <div class="tw-w-full tw-p-5 lg:tw-w-7/12">
                             <div class="tw-flex tw-justify-between tw-py-5 tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg">
-                                <div class="tw-w-full md:tw-w-8/12">
+                                <div class="tw-w-full lg:tw-w-8/12">
                                     <p class="tw-text-4xl">
                                         Jadwal Shalat
                                     </p>
@@ -16,13 +16,12 @@
                                         {{currentDateString}}
                                     </p>
                                 </div>
-                                <div class=" tw-w-full md:tw-w-4/12">
+                                <div class=" tw-w-full lg:tw-w-4/12">
                                     <p class="text-right">
-                                        Bogor
+                                        {{city.name}}
                                     </p>
                                 </div>
                             </div>
-
                             <div class="tw-pt-5">
                                 <div class="tw-text-gray-800 tw-text-6xl tw-font-extrabold tw-tracking-widest" style="font-size: 6rem;" v-if="!isIqomah">
                                     <div class=" tw-bg-yellow-400 tw-rounded-lg tw-p-4 tw-text-center">
@@ -43,8 +42,7 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="tw-w-full tw-p-5 md:tw-w-5/12 ">
+                        <div class="tw-w-full tw-p-5 lg:tw-w-5/12 ">
                             <div class="tw-mb-4" v-for="(scheduleTime, index) in todayScheduleTimes" :key="index">
                                 <app-time-item 
                                     :scheduleTime="scheduleTime"
@@ -98,11 +96,7 @@ export default {
 
     watch: {
         currentTimestamp: function(newVal, oldVal) {
-            console.log(newVal, oldVal);
-            console.log(this.maxTimestamp, this.minTimestamp);
-
             if(newVal > this.maxTimestamp  || newVal < this.minTimestamp ) {
-                console.log('new ahahah');
                 this.restartService();
             }
         }
@@ -213,7 +207,9 @@ export default {
             if(data) {
                 var gap = this.currentTimestamp - data.epoch;
                 
+                console.log(data.epoch + this.spareIqomah);
                 var distance = (data.epoch + this.spareIqomah) - this.currentTimestamp;
+                // console.log('distance', distance);
 
                 if(distance > 0 && data.time.is_iqomah == 1) {
                     this.isIqomah = true;

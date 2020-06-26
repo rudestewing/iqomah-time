@@ -2108,8 +2108,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2141,11 +2139,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   watch: {
     currentTimestamp: function currentTimestamp(newVal, oldVal) {
-      console.log(newVal, oldVal);
-      console.log(this.maxTimestamp, this.minTimestamp);
-
       if (newVal > this.maxTimestamp || newVal < this.minTimestamp) {
-        console.log('new ahahah');
         this.restartService();
       }
     }
@@ -2317,7 +2311,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       if (data) {
         var gap = this.currentTimestamp - data.epoch;
-        var distance = data.epoch + this.spareIqomah - this.currentTimestamp;
+        console.log(data.epoch + this.spareIqomah);
+        var distance = data.epoch + this.spareIqomah - this.currentTimestamp; // console.log('distance', distance);
 
         if (distance > 0 && data.time.is_iqomah == 1) {
           this.isIqomah = true;
@@ -25622,8 +25617,8 @@ var render = function() {
             "div",
             { staticClass: "tw-bg-gray-200 tw-bg-opacity-50 tw-rounded-lg" },
             [
-              _c("div", { staticClass: "tw-flex" }, [
-                _c("div", { staticClass: "tw-w-full tw-p-5 md:tw-w-7/12" }, [
+              _c("div", { staticClass: "tw-flex tw-flex-wrap" }, [
+                _c("div", { staticClass: "tw-w-full tw-p-5 lg:tw-w-7/12" }, [
                   _c(
                     "div",
                     {
@@ -25631,7 +25626,7 @@ var render = function() {
                         "tw-flex tw-justify-between tw-py-5 tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg"
                     },
                     [
-                      _c("div", { staticClass: "tw-w-full md:tw-w-8/12" }, [
+                      _c("div", { staticClass: "tw-w-full lg:tw-w-8/12" }, [
                         _c("p", { staticClass: "tw-text-4xl" }, [
                           _vm._v(
                             "\n                                    Jadwal Shalat\n                                "
@@ -25647,10 +25642,12 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: " tw-w-full md:tw-w-4/12" }, [
+                      _c("div", { staticClass: " tw-w-full lg:tw-w-4/12" }, [
                         _c("p", { staticClass: "text-right" }, [
                           _vm._v(
-                            "\n                                    Bogor\n                                "
+                            "\n                                    " +
+                              _vm._s(_vm.city.name) +
+                              "\n                                "
                           )
                         ])
                       ])
@@ -25714,7 +25711,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "tw-w-full tw-p-5 md:tw-w-5/12 " },
+                  { staticClass: "tw-w-full tw-p-5 lg:tw-w-5/12 " },
                   _vm._l(_vm.todayScheduleTimes, function(scheduleTime, index) {
                     return _c(
                       "div",
