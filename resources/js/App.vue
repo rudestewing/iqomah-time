@@ -18,7 +18,7 @@
                                 </div>
                                 <div class=" tw-w-full lg:tw-w-4/12">
                                     <p class="text-right">
-                                        {{city.name}}
+                                        <!-- {{city || city.name}} -->
                                     </p>
                                 </div>
                             </div>

@@ -25643,13 +25643,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: " tw-w-full lg:tw-w-4/12" }, [
-                        _c("p", { staticClass: "text-right" }, [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(_vm.city.name) +
-                              "\n                                "
-                          )
-                        ])
+                        _c("p", { staticClass: "text-right" })
                       ])
                     ]
                   ),
