@@ -16,6 +16,14 @@
                                 </p>
                             </div>
                             <img src="{{asset('storage/'.$item->image_path)}}" alt="" style="height: 240px; width: 240px; object-fit: cover; object-position: center;">
+                            <div class="tw-mt-5">
+                                <form action="{{route('admin.homeSlider.destroy', $item->id)}}" method="post">
+                                    @csrf
+                                    @method('delete')
+
+                                    <button type="submit" class="btn btn-md btn-danger btn-block"> Delete Slider  </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
