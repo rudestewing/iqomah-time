@@ -80,7 +80,7 @@ export default {
             return moment.unix(this.currentTimestamp).format('HH:mm:ss');
         },
         currentDateString: function() {
-            return moment.unix(this.currentTime);
+            return moment.unix(this.currentTimestamp).format('dddd, DD MMMM yyyy');
         }
     },
 
@@ -88,27 +88,8 @@ export default {
         startService() {
             this.findCity();
         },
-        
         stopService() {
-            
-        },
-
-        restartService() {
-
-        },
-
-        startCounting() {
-            const self = this;
-
-            this.interval = setInterval(() => {
-                self.setCurrentTimestamp();
-                self.findUpcoming();
-                self.findPassed();
-            }, 1000);
-        },
-
-        stopCounting() {
-            clearInterval(this.interval);
+            this.stopCounting();
         },
 
         async findCity() {
@@ -128,23 +109,35 @@ export default {
             };
 
             this.todayScheduleTimes = data.data;
+            this.startCounting();
         },
 
         setCurrentTimestamp() {
-
+            var value = moment().unix();
+            console.log(value);
+            this.currentTimestamp = value;
         },
+
         findUpcoming() {
 
         },
+        
         findPassed() {
 
         },
 
         startCounting() {
+            const self = this;
 
+            this.interval = setInterval(() => {
+                self.setCurrentTimestamp();
+                self.findUpcoming();
+                self.findPassed();
+            }, 1000);
         },
-        stopCounting() {
 
+        stopCounting() {
+            clearInterval(this.interval);
         },
     },
 

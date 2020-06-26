@@ -2043,10 +2043,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
 
 
-var _methods;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -2129,25 +2125,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return moment__WEBPACK_IMPORTED_MODULE_2___default.a.unix(this.currentTimestamp).format('HH:mm:ss');
     },
     currentDateString: function currentDateString() {
-      return moment__WEBPACK_IMPORTED_MODULE_2___default.a.unix(this.currentTime);
+      return moment__WEBPACK_IMPORTED_MODULE_2___default.a.unix(this.currentTimestamp).format('dddd, DD MMMM yyyy');
     }
   },
-  methods: (_methods = {
+  methods: {
     startService: function startService() {
       this.findCity();
     },
-    stopService: function stopService() {},
-    restartService: function restartService() {},
-    startCounting: function startCounting() {
-      var self = this;
-      this.interval = setInterval(function () {
-        self.setCurrentTimestamp();
-        self.findUpcoming();
-        self.findPassed();
-      }, 1000);
-    },
-    stopCounting: function stopCounting() {
-      clearInterval(this.interval);
+    stopService: function stopService() {
+      this.stopCounting();
     },
     findCity: function findCity() {
       var _this = this;
@@ -2196,7 +2182,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 };
                 _this2.todayScheduleTimes = data.data;
 
-              case 6:
+                _this2.startCounting();
+
+              case 7:
               case "end":
                 return _context2.stop();
             }
@@ -2204,10 +2192,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee2);
       }))();
     },
-    setCurrentTimestamp: function setCurrentTimestamp() {},
+    setCurrentTimestamp: function setCurrentTimestamp() {
+      var value = moment__WEBPACK_IMPORTED_MODULE_2___default()().unix();
+      console.log(value);
+      this.currentTimestamp = value;
+    },
     findUpcoming: function findUpcoming() {},
-    findPassed: function findPassed() {}
-  }, _defineProperty(_methods, "startCounting", function startCounting() {}), _defineProperty(_methods, "stopCounting", function stopCounting() {}), _methods),
+    findPassed: function findPassed() {},
+    startCounting: function startCounting() {
+      var self = this;
+      this.interval = setInterval(function () {
+        self.setCurrentTimestamp();
+        self.findUpcoming();
+        self.findPassed();
+      }, 1000);
+    },
+    stopCounting: function stopCounting() {
+      clearInterval(this.interval);
+    }
+  },
   mounted: function mounted() {
     this.startService();
   }
