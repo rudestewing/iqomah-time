@@ -3,7 +3,7 @@
         backgroundImage: `url(${imgbg})`,
     }">
         <component :is="`app-layout-default`">
-            <div class="tw-py-5 tw-z-10">
+            <div class="tw-py-5 tw-z-10" style="font-size: 20px;">
                 <div class="tw-bg-gray-200 tw-bg-opacity-50 tw-rounded-lg">
                     <div class="tw-flex tw-flex-wrap">
                         <div class="tw-w-full tw-p-5 lg:tw-w-7/12">
@@ -249,6 +249,5 @@ export default {
 <style lang="css">
     html, body {
         height: 100%;
-        font-size: 20px;
     }
 </style>

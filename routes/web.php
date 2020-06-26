@@ -14,6 +14,10 @@ Route::
     ->middleware('auth')
     ->as('admin.')
     ->group(function() {
+        Route::get('/', function() {
+            return redirect()->route('admin.home');
+        });
+
         Route::get('/home', 'HomeController@index')->name('home');
         Route::resource('settingBackground', 'SettingBackgroundController');
         Route::resource('homeSlider', 'HomeSliderController');

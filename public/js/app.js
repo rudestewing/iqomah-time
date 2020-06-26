@@ -2551,7 +2551,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "html, body {\n  height: 100%;\n  font-size: 20px;\n}\n", ""]);
+exports.push([module.i, "html, body {\n  height: 100%;\n}\n", ""]);
 
 // exports
 
@@ -25611,137 +25611,147 @@ var render = function() {
     },
     [
       _c("app-layout-default", { tag: "component" }, [
-        _c("div", { staticClass: "tw-py-5 tw-z-10" }, [
-          _c(
-            "div",
-            { staticClass: "tw-bg-gray-200 tw-bg-opacity-50 tw-rounded-lg" },
-            [
-              _c("div", { staticClass: "tw-flex tw-flex-wrap" }, [
-                _c("div", { staticClass: "tw-w-full tw-p-5 lg:tw-w-7/12" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "tw-flex tw-justify-between tw-py-5 tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg"
-                    },
-                    [
-                      _c("div", { staticClass: "tw-w-full lg:tw-w-8/12" }, [
-                        _c("p", { staticClass: "tw-text-4xl" }, [
-                          _vm._v(
-                            "\n                                    Jadwal Shalat\n                                "
-                          )
+        _c(
+          "div",
+          {
+            staticClass: "tw-py-5 tw-z-10",
+            staticStyle: { "font-size": "20px" }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "tw-bg-gray-200 tw-bg-opacity-50 tw-rounded-lg" },
+              [
+                _c("div", { staticClass: "tw-flex tw-flex-wrap" }, [
+                  _c("div", { staticClass: "tw-w-full tw-p-5 lg:tw-w-7/12" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "tw-flex tw-justify-between tw-py-5 tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg"
+                      },
+                      [
+                        _c("div", { staticClass: "tw-w-full lg:tw-w-8/12" }, [
+                          _c("p", { staticClass: "tw-text-4xl" }, [
+                            _vm._v(
+                              "\n                                    Jadwal Shalat\n                                "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "tw-text-5xl" }, [
+                            _vm._v(
+                              "\n                                    " +
+                                _vm._s(_vm.currentDateString) +
+                                "\n                                "
+                            )
+                          ])
                         ]),
                         _vm._v(" "),
-                        _c("p", { staticClass: "tw-text-5xl" }, [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(_vm.currentDateString) +
-                              "\n                                "
-                          )
+                        _c("div", { staticClass: " tw-w-full lg:tw-w-4/12" }, [
+                          _c("p", { staticClass: "text-right" })
                         ])
-                      ]),
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "tw-pt-5" }, [
+                      !_vm.isIqomah
+                        ? _c(
+                            "div",
+                            {
+                              staticClass:
+                                "tw-text-gray-800 tw-text-6xl tw-font-extrabold tw-tracking-widest",
+                              staticStyle: { "font-size": "6rem" }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    " tw-bg-yellow-400 tw-rounded-lg tw-p-4 tw-text-center"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                    " +
+                                      _vm._s(_vm.currentTimeString) +
+                                      "\n                                "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c("div", { staticClass: " tw-w-full lg:tw-w-4/12" }, [
-                        _c("p", { staticClass: "text-right" })
-                      ])
-                    ]
-                  ),
+                      _vm.reminderUpcomingTime
+                        ? _c(
+                            "div",
+                            [
+                              _c("app-reminder-upcoming-time", {
+                                class: " rounded-tl-none rounded-tr-none ",
+                                attrs: { upcomingTime: _vm.upcomingTime }
+                              })
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.isIqomah
+                        ? _c(
+                            "div",
+                            [
+                              _c("app-iqomah-countdown", {
+                                attrs: { iqomahDistance: _vm.iqomahDistance }
+                              })
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ])
+                  ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "tw-pt-5" }, [
-                    !_vm.isIqomah
-                      ? _c(
-                          "div",
-                          {
-                            staticClass:
-                              "tw-text-gray-800 tw-text-6xl tw-font-extrabold tw-tracking-widest",
-                            staticStyle: { "font-size": "6rem" }
-                          },
-                          [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  " tw-bg-yellow-400 tw-rounded-lg tw-p-4 tw-text-center"
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                    " +
-                                    _vm._s(_vm.currentTimeString) +
-                                    "\n                                "
-                                )
-                              ]
-                            )
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.reminderUpcomingTime
-                      ? _c(
-                          "div",
-                          [
-                            _c("app-reminder-upcoming-time", {
-                              class: " rounded-tl-none rounded-tr-none ",
-                              attrs: { upcomingTime: _vm.upcomingTime }
-                            })
-                          ],
-                          1
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.isIqomah
-                      ? _c(
-                          "div",
-                          [
-                            _c("app-iqomah-countdown", {
-                              attrs: { iqomahDistance: _vm.iqomahDistance }
-                            })
-                          ],
-                          1
-                        )
-                      : _vm._e()
-                  ])
+                  _c(
+                    "div",
+                    { staticClass: "tw-w-full tw-p-5 lg:tw-w-5/12 " },
+                    _vm._l(_vm.todayScheduleTimes, function(
+                      scheduleTime,
+                      index
+                    ) {
+                      return _c(
+                        "div",
+                        { key: index, staticClass: "tw-mb-4" },
+                        [
+                          _c("app-time-item", {
+                            attrs: { scheduleTime: scheduleTime }
+                          })
+                        ],
+                        1
+                      )
+                    }),
+                    0
+                  )
                 ]),
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "tw-w-full tw-p-5 lg:tw-w-5/12 " },
-                  _vm._l(_vm.todayScheduleTimes, function(scheduleTime, index) {
-                    return _c(
-                      "div",
-                      { key: index, staticClass: "tw-mb-4" },
-                      [
-                        _c("app-time-item", {
-                          attrs: { scheduleTime: scheduleTime }
-                        })
-                      ],
-                      1
+                  { staticClass: "text-center text-gray-200 text-xs pb-3" },
+                  [
+                    _vm._v(
+                      "\n                    Data berdasarkan hasil export dari "
+                    ),
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "https://jadwalsholat.pkpu.or.id/export.php"
+                        }
+                      },
+                      [_vm._v(" https://jadwalsholat.pkpu.or.id/export.php ")]
                     )
-                  }),
-                  0
+                  ]
                 )
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "text-center text-gray-200 text-xs pb-3" },
-                [
-                  _vm._v(
-                    "\n                    Data berdasarkan hasil export dari "
-                  ),
-                  _c(
-                    "a",
-                    {
-                      attrs: {
-                        href: "https://jadwalsholat.pkpu.or.id/export.php"
-                      }
-                    },
-                    [_vm._v(" https://jadwalsholat.pkpu.or.id/export.php ")]
-                  )
-                ]
-              )
-            ]
-          )
-        ])
+              ]
+            )
+          ]
+        )
       ])
     ],
     1
