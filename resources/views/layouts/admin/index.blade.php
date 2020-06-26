@@ -65,7 +65,6 @@
         <div class="tw-block tw-absolute tw-inset-y-0 tw-left-0 tw-bg-indigo-100 tw-shadow-md tw-border tw-border-l-0 tw-border-t-0 tw-border-b-0 tw-border-gray-500 tw-overflow-scroll" id="nav" style="width: 200px;">
             <ul>
                 <li><x-admin.navigation-item url="{{route('admin.home')}}" name="Home" ></x-admin-navigation-item></li>
-                <li><x-admin.navigation-item url="{{route('admin.setting.background.index')}}" name="Background" ></x-admin-navigation-item></li>
                 <li><x-admin.navigation-item url="{{route('admin.homeSlider.index')}}" name="Home Slider" ></x-admin-navigation-item></li>
                 <li><x-admin.navigation-item url="{{route('admin.time.index')}}" name="Time Setting" ></x-admin-navigation-item></li>
             </ul>

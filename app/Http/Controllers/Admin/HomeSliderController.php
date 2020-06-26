@@ -11,7 +11,6 @@ class HomeSliderController extends Controller
     public function index()
     {
         $data = HomeSlider::all();
-
         return view('admin.home-slider.index', compact('data'));
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
+use App\SettingSpare;
 use Illuminate\Http\Request;
 
 class SpareController extends Controller
@@ -35,7 +36,13 @@ class SpareController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        SettingSpare::first()->update([
+            'iqomah' => $request->iqomah,
+            'upcoming' => $request->upcoming,
+            'iqomah_alert' => $request->iqomah_alert,
+        ]);
+
+        return redirect()->back()->with('success', 'berhasil update');
     }
 
     /**
@@ -69,7 +76,11 @@ class SpareController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+
+        ]);
+
+        
     }
 
     /**
