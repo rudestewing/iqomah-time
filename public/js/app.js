@@ -2095,6 +2095,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2115,6 +2122,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       // 10 minutes iqomah countdown
       spareUpcoming: 600,
       // 10 minutes upcoming countdown 
+      upcomingTime: null,
+      reminderUpcomingTime: false,
       spareAlert: 20,
       maxTimeStamp: 0,
       minTimeStamp: 0
@@ -2197,7 +2206,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       console.log(value);
       this.currentTimestamp = value;
     },
-    findUpcoming: function findUpcoming() {},
+    findUpcoming: function findUpcoming() {
+      if (!this.todayScheduleTimes.length) {
+        return;
+      }
+
+      var self = this;
+      var data = Array.from(this.todayScheduleTimes).find(function (item, index) {
+        return self.currentTimestamp <= item.epoch;
+      });
+      console.log(data);
+
+      if (data) {
+        this.upcomingTime = data;
+        var gap = this.currentTimestamp - data.epoch;
+
+        if (gap >= -this.spareUpcoming) {
+          this.reminderUpcomingTime = true;
+        } else {
+          this.reminderUpcomingTime = false;
+        }
+      } else {
+        this.upcomingTime = null;
+      }
+    },
     findPassed: function findPassed() {},
     startCounting: function startCounting() {
       var self = this;
@@ -2246,13 +2278,34 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    upcomingTime: Object
+  },
+  computed: {
+    timeString: function timeString() {
+      if (this.upcomingTime) {
+        return moment__WEBPACK_IMPORTED_MODULE_0___default.a.unix(this.upcomingTime.epoch).format('HH:ss');
+      }
+    }
+  }
+});
 
 /***/ }),
 
@@ -2267,6 +2320,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+//
 //
 //
 //
@@ -2352,7 +2406,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "html, body {\n  height: 100%;\n}\n", ""]);
+exports.push([module.i, "html, body {\n  height: 100%;\n  font-size: 20px;\n}\n", ""]);
 
 // exports
 
@@ -25420,7 +25474,7 @@ var render = function() {
                     },
                     [
                       _c("div", { staticClass: "tw-w-full md:tw-w-8/12" }, [
-                        _c("p", [
+                        _c("p", { staticClass: "tw-text-4xl" }, [
                           _vm._v(
                             "\n                                    Jadwal Shalat\n                                "
                           )
@@ -25470,6 +25524,19 @@ var render = function() {
                               ]
                             )
                           ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.reminderUpcomingTime
+                      ? _c(
+                          "div",
+                          [
+                            _c("app-reminder-upcoming-time", {
+                              class: " rounded-tl-none rounded-tr-none ",
+                              attrs: { upcomingTime: _vm.upcomingTime }
+                            })
+                          ],
+                          1
                         )
                       : _vm._e()
                   ])
@@ -25566,7 +25633,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    {
+      staticClass:
+        " tw-p-4 tw-bg-yellow-600 tw-shadow-md tw-text-gray-100 tw-rounded-lg"
+    },
+    [
+      _vm.upcomingTime
+        ? _c("div", [
+            _c("p", { staticClass: "tw-text-4xl " }, [
+              _vm._v(
+                "\n            Sedikit lagi masuk waktu " +
+                  _vm._s(_vm.upcomingTime.time.title) +
+                  "\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "tw-text-6xl" }, [
+              _vm._v(
+                "\n            Waktu " +
+                  _vm._s(_vm.upcomingTime.time.title) +
+                  " " +
+                  _vm._s(_vm.timeString) +
+                  "\n        "
+              )
+            ])
+          ])
+        : _vm._e()
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -25594,7 +25690,7 @@ var render = function() {
     "div",
     {
       class:
-        "\n        tw-flex tw-flex-wrap tw-rounded-lg tw-shadow-lg tw-border-0 tw-border-l-8\n        " +
+        "\n        tw-flex tw-flex-wrap tw-rounded-lg tw-shadow-lg tw-border-0 tw-border-l-8 tw-p-5\n        " +
         (_vm.isActive == true
           ? "tw-bg-yellow-500 tw-border-yellow-700"
           : "tw-bg-gray-100 tw-border-indigo-700") +
@@ -25603,17 +25699,15 @@ var render = function() {
     [
       _c(
         "div",
-        {
-          staticClass:
-            "tw-font-semibold tw-tracking-wider md:tw-w-5/12 tw-px-5 tw-py-2"
-        },
+        { staticClass: "tw-font-semibold tw-tracking-wider md:tw-w-5/12" },
         [
           _c(
             "div",
             {
               class:
-                "tw-text-indigo-800 tw-uppercase " +
-                (_vm.isActive == true ? "tw-font-black" : "")
+                "tw-text-indigo-800 tw-font-bold tw-text-4xl tw-uppercase " +
+                (_vm.isActive == true ? "tw-font-black" : "") +
+                " tw-flex tw-items-center"
             },
             [
               _vm._v(
@@ -25624,30 +25718,22 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "tw-font-bold tw-text-4xl" }, [
-            _vm._v("\n            " + _vm._s(_vm.timeString) + "\n        ")
-          ])
+          _c("div", { staticClass: "tw-font-bold tw-text-4xl" })
         ]
       ),
       _vm._v(" "),
-      _vm._m(0)
+      _c(
+        "div",
+        {
+          staticClass:
+            "md:tw-w-7/12 tw-relative tw-font-extrabold tw-text-5xl tw-text-right"
+        },
+        [_vm._v("\n        " + _vm._s(_vm.timeString) + "\n        ")]
+      )
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "md:tw-w-7/12 tw-relative" }, [
-      _c("img", {
-        staticClass:
-          "tw-w-full tw-h-auto tw-object-cover tw-object-center tw-absolute tw-inset-0 tw-h-full tw-w-full",
-        attrs: { src: "#", alt: "" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

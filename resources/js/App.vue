@@ -7,7 +7,7 @@
                         <div class="tw-w-full tw-p-5 md:tw-w-7/12">
                             <div class="tw-flex tw-justify-between tw-py-5 tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg">
                                 <div class="tw-w-full md:tw-w-8/12">
-                                    <p>
+                                    <p class="tw-text-4xl">
                                         Jadwal Shalat
                                     </p>
                                     <p class="tw-text-5xl">
@@ -20,15 +20,22 @@
                                     </p>
                                 </div>
                             </div>
-                            
+
                             <div>
                                 <div class="tw-text-gray-800 tw-text-6xl tw-font-extrabold tw-tracking-widest" style="font-size: 6rem;" v-if="!isIqomah">
                                     <div class=" tw-bg-yellow-400 tw-rounded-lg tw-p-4 tw-text-center">
                                         {{currentTimeString}}
                                     </div>
                                 </div>
+                                <div v-if="reminderUpcomingTime">
+                                    <app-reminder-upcoming-time 
+                                        :upcomingTime="upcomingTime"
+                                        :class="` rounded-tl-none rounded-tr-none `">
+                                    </app-reminder-upcoming-time>
+                                </div>
                             </div>
                         </div>
+                        
                         <div class="tw-w-full tw-p-5 md:tw-w-5/12 ">
                             <div class="tw-mb-4" v-for="(scheduleTime, index) in todayScheduleTimes" :key="index">
                                 <app-time-item 
@@ -68,6 +75,9 @@ export default {
             spareIqomah: 600, // 10 minutes iqomah countdown
             spareUpcoming: 600, // 10 minutes upcoming countdown 
             
+            upcomingTime: null,
+            reminderUpcomingTime: false,
+
             spareAlert: 20,
 
             maxTimeStamp: 0,
@@ -119,7 +129,31 @@ export default {
         },
 
         findUpcoming() {
+            if(!this.todayScheduleTimes.length) {
+                return ;
+            }
 
+            var self = this;
+
+            var data = Array.from(this.todayScheduleTimes).find((item, index) => {
+                return self.currentTimestamp <= item.epoch;
+            });
+
+            console.log(data);
+
+            if(data) {
+                this.upcomingTime = data;
+
+                var gap = this.currentTimestamp - data.epoch;
+                if(gap >= -(this.spareUpcoming)) {
+                    
+                    this.reminderUpcomingTime = true; 
+                } else {
+                    this.reminderUpcomingTime = false;
+                }
+            } else {
+                this.upcomingTime = null;
+            }
         },
         
         findPassed() {
@@ -150,5 +184,6 @@ export default {
 <style lang="css">
     html, body {
         height: 100%;
+        font-size: 20px;
     }
 </style>
