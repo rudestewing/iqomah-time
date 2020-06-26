@@ -54,7 +54,7 @@ Route::get('homeSliders', function() {
     ], 200);
 });
 
-Route::get('settingSpare', function() {
+Route::get('spare', function() {
     return response()->json([
         'data' => SettingSpare::first()
     ]);

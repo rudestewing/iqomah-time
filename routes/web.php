@@ -20,9 +20,6 @@ Route::
 
         Route::get('/home', 'HomeController@index')->name('home');
 
-
-        Route::resource('settingBackground', 'SettingBackgroundController');
-        Route::resource('settingSpare', 'SettingSpareController');
         Route::resource('homeSlider', 'HomeSliderController');
         Route::resource('time', 'TimeController');
 

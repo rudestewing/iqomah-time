@@ -2122,13 +2122,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       isIqomah: false,
       iqomahCountdown: 0,
       iqomahDistance: 0,
-      spareIqomah: 600,
+      spareIqomah: 0,
       // 10 minutes iqomah countdown
-      spareUpcoming: 600,
+      spareUpcoming: 0,
       // 10 minutes upcoming countdown 
+      spareAlert: 0,
       upcomingTime: null,
       reminderUpcomingTime: false,
-      spareAlert: 20,
       maxTimestamp: 0,
       minTimestamp: 0,
       background: null,
@@ -2154,29 +2154,56 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
-    getBackground: function getBackground() {
+    getSetting: function getSetting() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response, data;
+        var background, data, spares;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/background');
+                _context.prev = 0;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/background');
 
-              case 2:
-                response = _context.sent;
-                data = response.data;
-                _this.background = data.data;
+              case 3:
+                background = _context.sent;
+                data = background.data.data;
+                _this.background = data;
+                _context.next = 11;
+                break;
 
-              case 5:
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                console.log(_context.t0);
+
+              case 11:
+                _context.prev = 11;
+                _context.next = 14;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/settingSpare');
+
+              case 14:
+                spares = _context.sent;
+                data = spares.data.data;
+                _this.spareIqomah = data.iqomah;
+                _this.spareUpcoming = data.upcoming;
+                _this.spareAlert = data.iqomah_alert;
+                _context.next = 24;
+                break;
+
+              case 21:
+                _context.prev = 21;
+                _context.t1 = _context["catch"](11);
+                console.log(_context.t1);
+
+              case 24:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 8], [11, 21]]);
       }))();
     },
     getHomeSliders: function getHomeSliders() {
@@ -2206,9 +2233,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     startService: function startService() {
       console.log('service start');
-      this.findCity();
-      this.getBackground();
+      this.getSetting();
       this.getHomeSliders();
+      this.findCity();
     },
     findCity: function findCity() {
       var _this3 = this;

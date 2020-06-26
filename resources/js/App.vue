@@ -76,13 +76,13 @@ export default {
             iqomahCountdown: 0,
             iqomahDistance: 0,
 
-            spareIqomah: 600, // 10 minutes iqomah countdown
-            spareUpcoming: 600, // 10 minutes upcoming countdown 
+            spareIqomah: 0, // 10 minutes iqomah countdown
+            spareUpcoming: 0, // 10 minutes upcoming countdown 
+            spareAlert: 0,
             
             upcomingTime: null,
             reminderUpcomingTime: false,
 
-            spareAlert: 20,
 
             maxTimestamp: 0,
             minTimestamp: 0,
@@ -115,11 +115,29 @@ export default {
     },
 
     methods: {
-        async getBackground() {
-            const response = await axios.get('api/background');
+        async getSetting() {
+            try {
+                const background = await axios.get('/api/background');
 
-            const {data} = response;
-            this.background = data.data;
+                var {data} = background.data;
+                
+                this.background = data;
+                
+            } catch (error) {
+                console.log(error);                
+            }
+
+            try {
+                const spares = await axios.get('/api/settingSpare');
+                var {data} = spares.data;
+    
+                this.spareIqomah = data.iqomah;
+                this.spareUpcoming = data.upcoming;
+                this.spareAlert = data.iqomah_alert;
+                
+            } catch (error) {
+                console.log(error);                
+            }
         },  
 
         async getHomeSliders() {
@@ -130,9 +148,9 @@ export default {
 
         startService() {
             console.log('service start');
-            this.findCity();
-            this.getBackground();
+            this.getSetting();
             this.getHomeSliders();
+            this.findCity();
         },
 
         async findCity() {
