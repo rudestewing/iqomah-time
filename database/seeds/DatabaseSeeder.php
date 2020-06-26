@@ -1,5 +1,6 @@
 <?php
 
+use App\SettingSpare;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,5 +14,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
         $this->call(TimeSeeder::class);
+        $this->call(SettingSpare::class);
     }
 }

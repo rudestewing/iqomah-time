@@ -2,12 +2,14 @@
 
 @section('content')
     <div class="container">
-        <form action="{{route('admin.time.update', $time->id)}}" enctype="multipart/form-data" method="post"> 
+        <h3 class="pb-4">
+            Setting Background Image
+        </h3>
+
+        <form action="#" method="post" enctype="multipart/form-data"> 
             @csrf
-            @method('patch')
             <div class="form-group">
-                <label for="">Background Image</label>
-                <img src="{{asset('storage/'.$time->image_path)}}" alt="" style="height: 200px;">
+                <img src="{{asset('storage/'.$data->image_path)}}" alt="" style="height: 300px;">
             </div>
             <div class="form-group">
                 <label for="">Upload New Image</label>
@@ -17,7 +19,7 @@
                 @enderror
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-md btn-primary"> Save </button>
+                <button class="btn btn-md btn-primary" type="submit">Save</button>
             </div>
         </form>
     </div>

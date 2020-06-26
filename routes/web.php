@@ -19,9 +19,22 @@ Route::
         });
 
         Route::get('/home', 'HomeController@index')->name('home');
+
+
         Route::resource('settingBackground', 'SettingBackgroundController');
+        Route::resource('settingSpare', 'SettingSpareController');
         Route::resource('homeSlider', 'HomeSliderController');
         Route::resource('time', 'TimeController');
+
+        Route::
+            prefix('setting')
+            ->namespace('Setting')
+            ->as('setting.')
+            ->group(function() {
+                Route::resource('background', 'BackgroundController');
+                Route::resource('spare', 'SpareController');
+            });
+        
     });
 
 Route::get('/{vue_capture?}', function () { return view('index'); })->where('vue_capture', '[\/\w\.-]*');

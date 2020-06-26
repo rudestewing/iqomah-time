@@ -9,9 +9,6 @@
                         <div class="tw-w-full tw-p-5 lg:tw-w-7/12">
                             <div class="tw-flex tw-justify-between tw-py-5 tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg">
                                 <div class="tw-w-full lg:tw-w-8/12">
-                                    <p class="tw-text-4xl">
-                                        Jadwal Shalat
-                                    </p>
                                     <p class="tw-text-5xl">
                                         {{currentDateString}}
                                     </p>

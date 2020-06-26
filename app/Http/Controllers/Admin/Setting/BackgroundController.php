@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
-use App\Time;
+use App\SettingBackground;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
-class TimeController extends Controller
+class BackgroundController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,9 @@ class TimeController extends Controller
      */
     public function index()
     {
-        $data = Time::all();
-        return view('admin.time.index', compact('data'));
+        $data = SettingBackground::first();
+
+        return view('admin.setting.background', compact('data'));
     }
 
     /**
@@ -26,7 +28,7 @@ class TimeController extends Controller
      */
     public function create()
     {
-        return 'can`t create ';
+        //
     }
 
     /**
@@ -37,7 +39,17 @@ class TimeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'image' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2000'],
+        ]);
+
+        if($request->image) {
+            $data = SettingBackground::query()->first()->update([
+                'image_path' => $request->file('image')->store('/', 'public')
+            ]);
+        }
+
+        return redirect()->back()->with('success', '');
     }
 
     /**
@@ -46,9 +58,9 @@ class TimeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Time $time)
+    public function show($id)
     {
-        return view('admin.time.edit', compact('time'));
+        //
     }
 
     /**
@@ -57,9 +69,9 @@ class TimeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Time $time)
+    public function edit($id)
     {
-        return view('admin.time.edit', compact('time'));
+        //
     }
 
     /**
@@ -69,19 +81,9 @@ class TimeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Time $time)
+    public function update(Request $request, $id)
     {
-        $request->validate([
-            'image' => ['nullable', 'mimes:jpg,jpeg,png', 'max:2000'],
-        ]);
-
-        if($request->image) {
-            $data = $time->update([
-                'image_path' => $request->file('image')->store('/', 'public')
-            ]);
-        }
-
-        return redirect()->back()->with('success', 'berhasil update');
+        //
     }
 
     /**
@@ -90,7 +92,7 @@ class TimeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Time $time)
+    public function destroy($id)
     {
         //
     }

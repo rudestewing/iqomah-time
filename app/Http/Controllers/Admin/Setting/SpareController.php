@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Setting;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class SettingBackgroundController extends Controller
+class SpareController extends Controller
 {
     /**
      * Display a listing of the resource.

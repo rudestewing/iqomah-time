@@ -4,6 +4,7 @@ use App\City;
 use App\HomeSlider;
 use App\Schedule;
 use App\SettingBackground;
+use App\SettingSpare;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,4 +52,10 @@ Route::get('homeSliders', function() {
     return response()->json([
         'data' => HomeSlider::all()
     ], 200);
+});
+
+Route::get('settingSpare', function() {
+    return response()->json([
+        'data' => SettingSpare::first()
+    ]);
 });

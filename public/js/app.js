@@ -2105,9 +2105,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -25632,12 +25629,6 @@ var render = function() {
                       },
                       [
                         _c("div", { staticClass: "tw-w-full lg:tw-w-8/12" }, [
-                          _c("p", { staticClass: "tw-text-4xl" }, [
-                            _vm._v(
-                              "\n                                    Jadwal Shalat\n                                "
-                            )
-                          ]),
-                          _vm._v(" "),
                           _c("p", { staticClass: "tw-text-5xl" }, [
                             _vm._v(
                               "\n                                    " +
