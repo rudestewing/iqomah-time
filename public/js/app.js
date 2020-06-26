@@ -2102,6 +2102,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2126,7 +2128,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       reminderUpcomingTime: false,
       spareAlert: 20,
       maxTimeStamp: 0,
-      minTimeStamp: 0
+      minTimeStamp: 0,
+      background: null,
+      sliders: []
     };
   },
   computed: {
@@ -2135,16 +2139,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     currentDateString: function currentDateString() {
       return moment__WEBPACK_IMPORTED_MODULE_2___default.a.unix(this.currentTimestamp).format('dddd, DD MMMM yyyy');
+    },
+    imgbg: function imgbg() {
+      return this.background ? "/storage/".concat(this.background.image_path) : '';
     }
   },
   methods: {
-    startService: function startService() {
-      this.findCity();
-    },
-    stopService: function stopService() {
-      this.stopCounting();
-    },
-    findCity: function findCity() {
+    getBackground: function getBackground() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -2154,16 +2155,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/city/1');
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/background');
 
               case 2:
                 response = _context.sent;
                 data = response.data;
-                _this.city = data.data;
+                _this.background = data.data;
 
-                _this.findToday();
-
-              case 6:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -2171,7 +2170,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee);
       }))();
     },
-    findToday: function findToday() {
+    getHomeSliders: function getHomeSliders() {
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
@@ -2181,24 +2180,84 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/today/".concat(_this2.city.id));
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/homeSliders');
 
               case 2:
                 response = _context2.sent;
                 data = response.data;
-                _this2.today = {
-                  dateTime: moment__WEBPACK_IMPORTED_MODULE_2___default()()
-                };
-                _this2.todayScheduleTimes = data.data;
+                _this2.sliders = data.data;
 
-                _this2.startCounting();
-
-              case 7:
+              case 5:
               case "end":
                 return _context2.stop();
             }
           }
         }, _callee2);
+      }))();
+    },
+    startService: function startService() {
+      this.findCity();
+      this.getBackground();
+      this.getHomeSliders();
+    },
+    stopService: function stopService() {
+      this.stopCounting();
+    },
+    findCity: function findCity() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var response, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/city/1');
+
+              case 2:
+                response = _context3.sent;
+                data = response.data;
+                _this3.city = data.data;
+
+                _this3.findToday();
+
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    findToday: function findToday() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response, data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/today/".concat(_this4.city.id));
+
+              case 2:
+                response = _context4.sent;
+                data = response.data;
+                _this4.today = {
+                  dateTime: moment__WEBPACK_IMPORTED_MODULE_2___default()()
+                };
+                _this4.todayScheduleTimes = data.data;
+
+                _this4.startCounting();
+
+              case 7:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
       }))();
     },
     setCurrentTimestamp: function setCurrentTimestamp() {
@@ -2342,6 +2401,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
@@ -2355,10 +2422,18 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     timeString: function timeString() {
       return moment__WEBPACK_IMPORTED_MODULE_0___default.a.unix(this.scheduleTime.epoch).format('HH:mm');
+    },
+    imgbg: function imgbg() {
+      return "/storage/".concat(this.scheduleTime.time.image_path);
     }
   },
   mounted: function mounted() {
     console.log(this.title, this.time, this.isActive);
+  },
+  methods: {
+    replaceDefaultBackground: function replaceDefaultBackground(e) {
+      return e.target.src = e.target.getAttribute('data-default');
+    }
   }
 });
 
@@ -25456,10 +25531,17 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "tw-min-h-full tw-bg-indigo-800", attrs: { id: "app-vue" } },
+    {
+      staticClass:
+        "tw-min-h-full tw-bg-indigo-800 tw-relative tw-bg-center tw-bg-cover tw-bg-opacity-25",
+      style: {
+        backgroundImage: "url(" + _vm.imgbg + ")"
+      },
+      attrs: { id: "app-vue" }
+    },
     [
       _c("app-layout-default", { tag: "component" }, [
-        _c("div", { staticClass: "tw-py-5" }, [
+        _c("div", { staticClass: "tw-py-5 tw-z-10" }, [
           _c(
             "div",
             { staticClass: "tw-bg-gray-200 tw-bg-opacity-50 tw-rounded-lg" },
@@ -25499,7 +25581,7 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("div", [
+                  _c("div", { staticClass: "tw-pt-5" }, [
                     !_vm.isIqomah
                       ? _c(
                           "div",
@@ -25690,22 +25772,31 @@ var render = function() {
     "div",
     {
       class:
-        "\n        tw-flex tw-flex-wrap tw-rounded-lg tw-shadow-lg tw-border-0 tw-border-l-8 tw-p-5\n        " +
+        "\n        tw-flex tw-flex-wrap tw-rounded-lg tw-shadow-lg tw-border-0 tw-border-l-8 tw-p-5 tw-relative\n        " +
         (_vm.isActive == true
           ? "tw-bg-yellow-500 tw-border-yellow-700"
           : "tw-bg-gray-100 tw-border-indigo-700") +
         "\n    "
     },
     [
+      _c("img", {
+        staticClass:
+          "\n            tw-w-full \n            tw-h-auto \n            tw-object-cover \n            tw-object-center \n            tw-absolute \n            tw-inset-0 \n            tw-h-full \n            tw-w-full\n            tw-z-0\n            tw-opacity-25\n        ",
+        attrs: { src: _vm.imgbg, alt: "", "data-default": "/mosque.jpeg" },
+        on: { error: _vm.replaceDefaultBackground }
+      }),
+      _vm._v(" "),
       _c(
         "div",
-        { staticClass: "tw-font-semibold tw-tracking-wider md:tw-w-5/12" },
+        {
+          staticClass: "tw-font-semibold tw-tracking-wider md:tw-w-5/12 tw-z-20"
+        },
         [
           _c(
             "div",
             {
               class:
-                "tw-text-indigo-800 tw-font-bold tw-text-4xl tw-uppercase " +
+                "tw-text-indigo-900 tw-font-extrabold tw-text-5xl tw-uppercase " +
                 (_vm.isActive == true ? "tw-font-black" : "") +
                 " tw-flex tw-items-center"
             },
@@ -25716,9 +25807,7 @@ var render = function() {
                   "\n        "
               )
             ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "tw-font-bold tw-text-4xl" })
+          )
         ]
       ),
       _vm._v(" "),
@@ -25726,9 +25815,9 @@ var render = function() {
         "div",
         {
           staticClass:
-            "md:tw-w-7/12 tw-relative tw-font-extrabold tw-text-5xl tw-text-right"
+            "md:tw-w-7/12 tw-font-extrabold tw-text-5xl tw-text-right tw-z-20 tw-text-indigo-900"
         },
-        [_vm._v("\n        " + _vm._s(_vm.timeString) + "\n        ")]
+        [_vm._v("\n        " + _vm._s(_vm.timeString) + "\n    ")]
       )
     ]
   )

@@ -1,7 +1,9 @@
 <?php
 
 use App\City;
+use App\HomeSlider;
 use App\Schedule;
+use App\SettingBackground;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,4 +39,16 @@ Route::get('city/{city}', function(City $city) {
     return response()->json([
         'data' => $city
     ]);
+});
+
+Route::get('background', function() {
+    return response()->json([
+        'data' => SettingBackground::first()
+    ], 200);
+});
+
+Route::get('homeSliders', function() {
+    return response()->json([
+        'data' => HomeSlider::all()
+    ], 200);
 });

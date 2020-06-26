@@ -1,7 +1,9 @@
 <template>
-    <div id="app-vue" class="tw-min-h-full tw-bg-indigo-800">
+    <div id="app-vue" class="tw-min-h-full tw-bg-indigo-800 tw-relative tw-bg-center tw-bg-cover tw-bg-opacity-25"  :style="{
+        backgroundImage: `url(${imgbg})`,
+    }">
         <component :is="`app-layout-default`">
-            <div class="tw-py-5">
+            <div class="tw-py-5 tw-z-10">
                 <div class="tw-bg-gray-200 tw-bg-opacity-50 tw-rounded-lg">
                     <div class="tw-flex">
                         <div class="tw-w-full tw-p-5 md:tw-w-7/12">
@@ -21,7 +23,7 @@
                                 </div>
                             </div>
 
-                            <div>
+                            <div class="tw-pt-5">
                                 <div class="tw-text-gray-800 tw-text-6xl tw-font-extrabold tw-tracking-widest" style="font-size: 6rem;" v-if="!isIqomah">
                                     <div class=" tw-bg-yellow-400 tw-rounded-lg tw-p-4 tw-text-center">
                                         {{currentTimeString}}
@@ -82,6 +84,9 @@ export default {
 
             maxTimeStamp: 0,
             minTimeStamp: 0,
+
+            background: null,
+            sliders: [],
         }
     },
 
@@ -91,12 +96,32 @@ export default {
         },
         currentDateString: function() {
             return moment.unix(this.currentTimestamp).format('dddd, DD MMMM yyyy');
-        }
+        },
+
+        imgbg: function() {
+            return this.background ? 
+                `/storage/${this.background.image_path}` : ''
+        },
     },
 
     methods: {
+        async getBackground() {
+            const response = await axios.get('api/background');
+
+            const {data} = response;
+            this.background = data.data;
+        },  
+
+        async getHomeSliders() {
+            const response = await axios.get('api/homeSliders');
+            const {data} = response;
+            this.sliders = data.data;
+        },
+
         startService() {
             this.findCity();
+            this.getBackground();
+            this.getHomeSliders();
         },
         stopService() {
             this.stopCounting();
