@@ -2104,6 +2104,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2289,7 +2295,29 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.upcomingTime = null;
       }
     },
-    findPassed: function findPassed() {},
+    findPassed: function findPassed() {
+      if (!this.todayScheduleTimes.length) {
+        return;
+      }
+
+      var self = this;
+      var data = Array.from(this.todayScheduleTimes).find(function (item, index) {
+        return self.currentTimestamp >= item.epoch;
+      });
+
+      if (data) {
+        var gap = this.currentTimestamp - data.epoch;
+        var distance = data.epoch + this.spareIqomah - this.currentTimestamp;
+        console.log(gap, distance);
+
+        if (distance > 0 && data.time.is_iqomah == 1) {
+          this.isIqomah = true;
+          this.iqomahDistance = distance;
+        } else {
+          this.isIqomah = false;
+        }
+      }
+    },
     startCounting: function startCounting() {
       var self = this;
       this.interval = setInterval(function () {
@@ -2324,7 +2352,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: {
+    iqomahDistance: Number
+  },
+  computed: {
+    countdownString: function countdownString() {
+      return this.countIqomah(this.iqomahDistance);
+    }
+  },
+  methods: {
+    countIqomah: function countIqomah(distance) {
+      // Time calculations for days, hours, minutes and seconds
+      // var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      // var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      // var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      // var days = Math.floor(distance / ( 60 * 60 * 24));
+      // var hours = Math.floor((distance % ( 60 * 60 * 24)) / ( 60 * 60));
+      var minutes = Math.floor(distance % (60 * 60) / 60);
+      var seconds = Math.floor(distance % 60); // $('#iqomah-countdown').html(days + "d " + hours + "h "+ minutes + "m " + seconds + "s ");
+
+      return minutes + " Menit " + seconds + " Detik"; // $('#iqomah-countdown').html(minutes + " Menit " + seconds + " Detik");
+    }
+  }
+});
 
 /***/ }),
 
@@ -2360,7 +2421,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     timeString: function timeString() {
       if (this.upcomingTime) {
-        return moment__WEBPACK_IMPORTED_MODULE_0___default.a.unix(this.upcomingTime.epoch).format('HH:ss');
+        return moment__WEBPACK_IMPORTED_MODULE_0___default.a.unix(this.upcomingTime.epoch).format('HH:mm:ss');
       }
     }
   }
@@ -25620,6 +25681,18 @@ var render = function() {
                           ],
                           1
                         )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.isIqomah
+                      ? _c(
+                          "div",
+                          [
+                            _c("app-iqomah-countdown", {
+                              attrs: { iqomahDistance: _vm.iqomahDistance }
+                            })
+                          ],
+                          1
+                        )
                       : _vm._e()
                   ])
                 ]),
@@ -25691,7 +25764,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    {
+      staticClass:
+        " tw-p-4 tw-bg-green-700 tw-shadow-md tw-text-gray-100 tw-rounded-lg"
+    },
+    [
+      _c(
+        "p",
+        {
+          staticClass:
+            " tw-text-4xl tw-font-bold tw-leading-6 tw-tracking-wider"
+        },
+        [_vm._v("\n        IQOMAH\n    ")]
+      ),
+      _vm._v(" "),
+      _c("p", { staticClass: " tw-text-6xl tw-font-bold" }, [
+        _vm._v("\n        " + _vm._s(_vm.countdownString) + "\n    ")
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

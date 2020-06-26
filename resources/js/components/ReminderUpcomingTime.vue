@@ -22,7 +22,7 @@ export default {
     computed: {
         timeString: function() {
             if(this.upcomingTime) {
-                return moment.unix(this.upcomingTime.epoch).format('HH:ss');
+                return moment.unix(this.upcomingTime.epoch).format('HH:mm:ss');
             }   
         }
     }

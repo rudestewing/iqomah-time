@@ -35,6 +35,12 @@
                                         :class="` rounded-tl-none rounded-tr-none `">
                                     </app-reminder-upcoming-time>
                                 </div>
+
+                                <div v-if="isIqomah">
+                                    <app-iqomah-countdown 
+                                        :iqomahDistance="iqomahDistance">
+                                    </app-iqomah-countdown>
+                                </div>
                             </div>
                         </div>
                         
@@ -182,7 +188,30 @@ export default {
         },
         
         findPassed() {
+            if(!this.todayScheduleTimes.length) {
+                return ;
+            }
+            
+            var self = this;
 
+            var data =  Array.from(this.todayScheduleTimes).find((item, index) => {
+                return self.currentTimestamp >= item.epoch;
+            });
+
+            if(data) {
+                var gap = this.currentTimestamp - data.epoch;
+                
+                var distance = (data.epoch + this.spareIqomah) - this.currentTimestamp;
+                
+                console.log(gap, distance);
+
+                if(distance > 0 && data.time.is_iqomah == 1) {
+                    this.isIqomah = true;
+                    this.iqomahDistance = distance;
+                } else {
+                    this.isIqomah = false;
+                }
+            }
         },
 
         startCounting() {
