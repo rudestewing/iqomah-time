@@ -5,7 +5,7 @@
             ${(isActive == true ? 'tw-bg-yellow-500 tw-border-yellow-700' : 'tw-bg-gray-100 tw-border-indigo-700')}
         `"
         >
-        <img :src="imgbg" alt="" data-default="/mosque.jpeg" @error="replaceDefaultBackground" class="
+        <!-- <img :src="imgbg" alt="" data-default="/mosque.jpeg" @error="replaceDefaultBackground" class="
                 tw-w-full 
                 tw-h-auto 
                 tw-object-cover 
@@ -16,13 +16,13 @@
                 tw-w-full
                 tw-z-0
                 tw-opacity-25
-            ">
-        <div class="tw-font-semibold tw-tracking-wider md:tw-w-5/12 tw-z-20">
+            "> -->
+        <div class="tw-font-semibold tw-tracking-wider tw-w-full lg:tw-w-5/12 tw-z-20">
             <div :class="`tw-text-indigo-900 tw-font-extrabold tw-text-5xl tw-uppercase ${(isActive == true ? 'tw-font-black' : '')} tw-flex tw-items-center`">
                 {{scheduleTime.time.title}}
             </div>
         </div>
-        <div class="md:tw-w-7/12 tw-font-extrabold tw-text-5xl tw-text-right tw-z-20 tw-text-indigo-900">
+        <div class="tw-w-full lg:tw-w-7/12 tw-font-extrabold tw-text-5xl tw-text-right tw-z-20 tw-text-indigo-900">
             {{timeString}}
         </div>
     </div>

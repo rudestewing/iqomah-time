@@ -6,7 +6,7 @@
             <div class="tw-py-5 tw-z-10" style="font-size: 20px;">
                 <div class="tw-bg-gray-200 tw-bg-opacity-50 tw-rounded-lg">
                     <div class="tw-flex tw-flex-wrap">
-                        <div class="tw-w-full tw-p-5 lg:tw-w-7/12">
+                        <div class="tw-w-full tw-p-5 lg:tw-w-8/12">
                             <div class="tw-flex tw-justify-between tw-py-5 tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg">
                                 <div class="tw-w-full lg:tw-w-8/12">
                                     <p class="tw-text-5xl">
@@ -19,27 +19,31 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="tw-pt-5">
-                                <div class="tw-text-gray-800 tw-text-6xl tw-font-extrabold tw-tracking-widest" style="font-size: 6rem;" v-if="!isIqomah">
-                                    <div class=" tw-bg-yellow-400 tw-rounded-lg tw-p-4 tw-text-center">
-                                        {{currentTimeString}}
-                                    </div>
-                                </div>
-                                <div v-if="reminderUpcomingTime">
-                                    <app-reminder-upcoming-time 
-                                        :upcomingTime="upcomingTime"
-                                        :class="` rounded-tl-none rounded-tr-none `">
-                                    </app-reminder-upcoming-time>
-                                </div>
 
-                                <div v-if="isIqomah">
-                                    <app-iqomah-countdown 
-                                        :iqomahDistance="iqomahDistance">
-                                    </app-iqomah-countdown>
+                            <div class="tw-pt-5">
+                                <div v-if="!isIqomah" class="tw-text-gray-800 tw-text-6xl tw-font-extrabold tw-tracking-widest tw-bg-yellow-400 tw-rounded-lg tw-p-4 tw-text-center" style="font-size: 6rem;" >
+                                    {{currentTimeString}}
                                 </div>
                             </div>
+                        
+                            <div v-if="isIqomah" class="tw-pt-5">
+                                <app-iqomah-countdown 
+                                    :iqomahDistance="iqomahDistance">
+                                </app-iqomah-countdown>
+                            </div>
+
+                            <div v-if="reminderUpcomingTime" class="tw-pt-5">
+                                <app-reminder-upcoming-time 
+                                    :upcomingTime="upcomingTime"
+                                    :class="` rounded-tl-none rounded-tr-none `">
+                                </app-reminder-upcoming-time>
+                            </div>
+
+                            <div v-if="!reminderUpcomingTime && !isIqomah" class="tw-pt-5">
+                                <app-home-slider :contents="sliderContents"></app-home-slider>
+                            </div>
                         </div>
-                        <div class="tw-w-full tw-p-5 lg:tw-w-5/12 ">
+                        <div class="tw-w-full tw-p-5 lg:tw-w-4/12 ">
                             <div class="tw-mb-4" v-for="(scheduleTime, index) in todayScheduleTimes" :key="index">
                                 <app-time-item 
                                     :scheduleTime="scheduleTime"
@@ -88,7 +92,7 @@ export default {
             minTimestamp: 0,
 
             background: null,
-            sliders: [],
+            sliderContents: [],
         }
     },
 
@@ -128,8 +132,9 @@ export default {
             }
 
             try {
-                const spares = await axios.get('/api/settingSpare');
+                const spares = await axios.get('/api/spare');
                 var {data} = spares.data;
+                console.log('data', data);
     
                 this.spareIqomah = data.iqomah;
                 this.spareUpcoming = data.upcoming;
@@ -140,16 +145,16 @@ export default {
             }
         },  
 
-        async getHomeSliders() {
+        async getHomeSliderContents() {
             const response = await axios.get('api/homeSliders');
             const {data} = response;
-            this.sliders = data.data;
+            this.sliderContents = data.data;
         },
 
         startService() {
             console.log('service start');
             this.getSetting();
-            this.getHomeSliders();
+            this.getHomeSliderContents();
             this.findCity();
         },
 

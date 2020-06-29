@@ -1,14 +1,11 @@
 <template>
     <div class="tw-p-8 tw-bg-green-700 tw-shadow-md tw-text-gray-100 tw-rounded-lg">
-        <p class=" tw-mb-0 tw-font-bold tw-leading-6 tw-tracking-wider tw-text-5xl">
+        <h3 class="tw-font-bold tw-leading-6 tw-tracking-wider tw-text-5xl tw-mt-6">
             IQOMAH
-        </p>
-        <p class="tw-mb-0 tw-text-6xl tw-font-bold">
+        </h3>
+        <p class="tw-mb-0 tw-text-6xl tw-font-bold tw-mt-5">
             {{countdownString}}
         </p>
-        <!-- <p>
-            Waktu Syuruq <span> {{time}} </span> 
-        </p> -->
     </div>
 </template>
 
