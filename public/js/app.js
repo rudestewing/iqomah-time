@@ -2106,10 +2106,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -36923,23 +36919,21 @@ var render = function() {
                     ),
                     _vm._v(" "),
                     _c("div", { staticClass: "tw-pt-5" }, [
-                      !_vm.isIqomah
-                        ? _c(
-                            "div",
-                            {
-                              staticClass:
-                                "tw-text-gray-800 tw-text-6xl tw-font-extrabold tw-tracking-widest tw-bg-yellow-400 tw-rounded-lg tw-p-4 tw-text-center",
-                              staticStyle: { "font-size": "6rem" }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(_vm.currentTimeString) +
-                                  "\n                            "
-                              )
-                            ]
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "tw-text-gray-800 tw-text-6xl tw-font-extrabold tw-tracking-widest tw-bg-yellow-400 tw-rounded-lg tw-p-4 tw-text-center",
+                          staticStyle: { "font-size": "6rem" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(_vm.currentTimeString) +
+                              "\n                            "
                           )
-                        : _vm._e()
+                        ]
+                      )
                     ]),
                     _vm._v(" "),
                     _vm.isIqomah

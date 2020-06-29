@@ -19,26 +19,22 @@
                                     </p>
                                 </div>
                             </div>
-
                             <div class="tw-pt-5">
-                                <div v-if="!isIqomah" class="tw-text-gray-800 tw-text-6xl tw-font-extrabold tw-tracking-widest tw-bg-yellow-400 tw-rounded-lg tw-p-4 tw-text-center" style="font-size: 6rem;" >
+                                <div class="tw-text-gray-800 tw-text-6xl tw-font-extrabold tw-tracking-widest tw-bg-yellow-400 tw-rounded-lg tw-p-4 tw-text-center" style="font-size: 6rem;" >
                                     {{currentTimeString}}
                                 </div>
                             </div>
-                        
                             <div v-if="isIqomah" class="tw-pt-5">
                                 <app-iqomah-countdown 
                                     :iqomahDistance="iqomahDistance">
                                 </app-iqomah-countdown>
                             </div>
-
                             <div v-if="reminderUpcomingTime" class="tw-pt-5">
                                 <app-reminder-upcoming-time 
                                     :upcomingTime="upcomingTime"
                                     :class="` rounded-tl-none rounded-tr-none `">
                                 </app-reminder-upcoming-time>
                             </div>
-
                             <div v-if="!reminderUpcomingTime && !isIqomah" class="tw-pt-5">
                                 <app-home-slider :contents="sliderContents"></app-home-slider>
                             </div>
