@@ -1,8 +1,8 @@
 <template>
     <div 
         :class="`
-            tw-flex tw-flex-wrap tw-rounded-lg tw-shadow-lg tw-border-0 tw-border-l-8 tw-p-5 tw-relative
-            ${(isActive == true ? 'tw-bg-yellow-500 tw-border-yellow-700' : 'tw-bg-gray-100 tw-border-indigo-700')}
+            tw-flex tw-flex-wrap tw-rounded-lg tw-shadow-lg tw-border-0 tw-border-l-8 tw-py-2 tw-px-4 tw-relative
+            ${(isActive == true ? 'tw-bg-yellow-500 tw-border-yellow-700' : 'tw-bg-gray-200 tw-border-indigo-700')}
         `"
         >
         <!-- <img :src="imgbg" alt="" data-default="/mosque.jpeg" @error="replaceDefaultBackground" class="
@@ -18,7 +18,7 @@
                 tw-opacity-25
             "> -->
         <div class="tw-font-semibold tw-tracking-wider tw-w-full lg:tw-w-5/12 tw-z-20">
-            <div :class="`tw-text-indigo-900 tw-font-extrabold tw-text-5xl tw-uppercase ${(isActive == true ? 'tw-font-black' : '')} tw-flex tw-items-center`">
+            <div :class="`tw-text-indigo-900 tw-font-extrabold tw-text-4xl tw-uppercase ${(isActive == true ? 'tw-font-black' : '')} tw-flex tw-items-center`">
                 {{scheduleTime.time.title}}
             </div>
         </div>

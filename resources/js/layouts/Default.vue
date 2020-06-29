@@ -7,7 +7,7 @@
             tw-mx-auto 
             tw-px-0 
             xl:tw-text-2xl 
-            md:tw-px-5" 
+            md:tw-p-4" 
             style="max-width: 2048px;"
             >
             <slot></slot>

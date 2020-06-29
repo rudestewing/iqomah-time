@@ -36884,10 +36884,7 @@ var render = function() {
       _c("app-layout-default", { tag: "component" }, [
         _c(
           "div",
-          {
-            staticClass: "tw-py-5 tw-z-10",
-            staticStyle: { "font-size": "20px" }
-          },
+          { staticClass: "tw-z-10", staticStyle: { "font-size": "20px" } },
           [
             _c(
               "div",
@@ -36899,7 +36896,7 @@ var render = function() {
                       "div",
                       {
                         staticClass:
-                          "tw-flex tw-justify-between tw-py-5 tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg"
+                          "tw-flex tw-justify-between tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg"
                       },
                       [
                         _c("div", { staticClass: "tw-w-full lg:tw-w-8/12" }, [
@@ -36986,7 +36983,7 @@ var render = function() {
                     ) {
                       return _c(
                         "div",
-                        { key: index, staticClass: "tw-mb-4" },
+                        { key: index, staticClass: "tw-mb-3" },
                         [
                           _c("app-time-item", {
                             attrs: { scheduleTime: scheduleTime }
@@ -37075,7 +37072,7 @@ var render = function() {
           }
         },
         _vm._l(_vm.contents, function(item, index) {
-          return _c("div", { key: index, staticStyle: { height: "auto" } }, [
+          return _c("div", { key: index, staticStyle: { height: "full" } }, [
             _c("img", {
               staticStyle: {
                 height: "auto",
@@ -37216,10 +37213,10 @@ var render = function() {
     "div",
     {
       class:
-        "\n        tw-flex tw-flex-wrap tw-rounded-lg tw-shadow-lg tw-border-0 tw-border-l-8 tw-p-5 tw-relative\n        " +
+        "\n        tw-flex tw-flex-wrap tw-rounded-lg tw-shadow-lg tw-border-0 tw-border-l-8 tw-py-2 tw-px-4 tw-relative\n        " +
         (_vm.isActive == true
           ? "tw-bg-yellow-500 tw-border-yellow-700"
-          : "tw-bg-gray-100 tw-border-indigo-700") +
+          : "tw-bg-gray-200 tw-border-indigo-700") +
         "\n    "
     },
     [
@@ -37234,7 +37231,7 @@ var render = function() {
             "div",
             {
               class:
-                "tw-text-indigo-900 tw-font-extrabold tw-text-5xl tw-uppercase " +
+                "tw-text-indigo-900 tw-font-extrabold tw-text-4xl tw-uppercase " +
                 (_vm.isActive == true ? "tw-font-black" : "") +
                 " tw-flex tw-items-center"
             },
@@ -37290,7 +37287,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "\n        tw-h-full \n        tw-mx-auto \n        tw-px-0 \n        xl:tw-text-2xl \n        md:tw-px-5",
+            "\n        tw-h-full \n        tw-mx-auto \n        tw-px-0 \n        xl:tw-text-2xl \n        md:tw-p-4",
           staticStyle: { "max-width": "2048px" }
         },
         [_vm._t("default")],

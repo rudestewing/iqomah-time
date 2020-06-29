@@ -3,11 +3,11 @@
         backgroundImage: `url(${imgbg})`,
     }">
         <component :is="`app-layout-default`">
-            <div class="tw-py-5 tw-z-10" style="font-size: 20px;">
+            <div class="tw-z-10" style="font-size: 20px;">
                 <div class="tw-bg-gray-200 tw-bg-opacity-50 tw-rounded-lg">
                     <div class="tw-flex tw-flex-wrap">
                         <div class="tw-w-full tw-p-5 lg:tw-w-8/12">
-                            <div class="tw-flex tw-justify-between tw-py-5 tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg">
+                            <div class="tw-flex tw-justify-between tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg">
                                 <div class="tw-w-full lg:tw-w-8/12">
                                     <p class="tw-text-5xl">
                                         {{currentDateString}}
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="tw-w-full tw-p-5 lg:tw-w-4/12 ">
-                            <div class="tw-mb-4" v-for="(scheduleTime, index) in todayScheduleTimes" :key="index">
+                            <div class="tw-mb-3" v-for="(scheduleTime, index) in todayScheduleTimes" :key="index">
                                 <app-time-item 
                                     :scheduleTime="scheduleTime"
                                 ></app-time-item>
