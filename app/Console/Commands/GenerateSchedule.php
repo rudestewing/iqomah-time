@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Schedule;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class GenerateSchedule extends Command
@@ -14,7 +15,7 @@ class GenerateSchedule extends Command
      *
      * @var string
      */
-    protected $signature = 'generate-schedule';
+    protected $signature = 'generate-schedule {city} {year} ';
 
     /**
      * The console command description.
@@ -40,8 +41,13 @@ class GenerateSchedule extends Command
      */
     public function handle()
     {
+        
         $this->info('finding xml file ');
-        $file = Storage::disk('local')->get('data-source-xml/data-bogor-2020.xml');
+        $path = public_path("data-source-xml/{$this->argument('city')}/{$this->argument('year')}.xml");
+        $file = File::get($path);
+        
+        // $file = asset("data-source-xml/{$this->argument('city')}/{$this->argument('year')}.xml");
+        // $file = Storage::disk('local')->get("data-source-xml/{$this->argument('city')}/{$this->argument('year')}.xml");
         $this->info('file found !');
 
         $this->info('converting xml file to object');
