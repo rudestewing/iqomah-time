@@ -13,7 +13,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
         $this->call(TimeSeeder::class);
-        $this->call(SettingSpareSeeder::class);
+        SettingSpare::create([
+            'iqomah' => 600,
+            'iqomah_alert' => 12,
+            'upcoming' => 600,
+        ]);
+        // $this->call(SettingSpareSeeder::class);
         $this->call(CitySeeder::class);
     }
 }
