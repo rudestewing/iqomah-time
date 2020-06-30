@@ -1,5 +1,6 @@
 <?php
 
+use App\SettingBackground;
 use App\SettingSpare;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -23,6 +24,9 @@ class DatabaseSeeder extends Seeder
         DB::table('cities')->insert([
             'id' => 1,
             'name' => 'bogor'
+        ]);
+        SettingBackground::create([
+            'image_path' => ''
         ]);
         // $this->call(SettingSpareSeeder::class);
         // $this->call(CitySeeder::class);
