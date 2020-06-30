@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue'
 import router from './router/config';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 Vue.component('app-layout-default', require('./layouts/Default.vue').default);
 

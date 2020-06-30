@@ -16,8 +16,8 @@
             @lazyLoadError="handleLazeLoadError"
                 class=" tw-rounded-md"
             >
-                <div v-for="(item, index) in contents" :key="index" style="height: full;">
-                    <img :src="`/storage/${item.image_path}`" alt="" style="height: auto; width: 100%; object-fit: cover; object-position: center;">
+                <div v-for="(item, index) in contents" :key="index" style="height: 450px;">
+                    <img :src="`/storage/${item.image_path}`" alt="" style="height: 450px; width: 100%; object-fit: cover; object-position: center;">
                 </div>
         </app-slick>
     </div>

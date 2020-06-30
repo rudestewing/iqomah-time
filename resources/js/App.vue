@@ -1,5 +1,5 @@
 <template>
-    <div id="app-vue" class="tw-min-h-full tw-bg-indigo-800 tw-relative tw-bg-center tw-bg-cover tw-bg-opacity-25"  :style="{
+    <div id="app-vue" ref="wrapper" class="tw-min-h-full tw-bg-indigo-800 tw-relative tw-bg-center tw-bg-cover tw-bg-opacity-25"  :style="{
         backgroundImage: `url(${imgbg})`,
     }">
         <component :is="`app-layout-default`">
@@ -45,6 +45,9 @@
                                     :scheduleTime="scheduleTime"
                                 ></app-time-item>
                             </div>
+                            <div>
+                                <button @click="enterFullScreen" class="btn btn-md tw-bg-indigo-700 tw-text-gray-200"> <i class="fas fa-expand"></i></button>
+                            </div>
                         </div>
                     </div>
                     <div class="text-center text-gray-200 text-xs pb-3">
@@ -88,7 +91,7 @@ export default {
             minTimestamp: 0,
 
             background: null,
-            sliderContents: [],
+            sliderContents: [],            
         }
     },
 
@@ -115,6 +118,12 @@ export default {
     },
 
     methods: {
+        enterFullScreen() {
+            this.$refs.wrapper.requestFullscreen();
+        },
+        exitFullScreen() {
+            this.$refs.wrapper.exitFullScreen();
+        },
         async getSetting() {
             try {
                 const background = await axios.get('/api/background');
@@ -262,8 +271,6 @@ export default {
 
         playIqomahAlertSound() {
             new Audio('/sounds/beep.mp3').play();
-            // console.log('play alert sound');
-            // this.$refs.audioElement.play();
         }
     },
 
