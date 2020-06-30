@@ -2,6 +2,7 @@
 
 use App\SettingSpare;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,7 +20,11 @@ class DatabaseSeeder extends Seeder
             'iqomah_alert' => 12,
             'upcoming' => 600,
         ]);
+        DB::table('cities')->insert([
+            'id' => 1,
+            'name' => 'bogor'
+        ]);
         // $this->call(SettingSpareSeeder::class);
-        $this->call(CitySeeder::class);
+        // $this->call(CitySeeder::class);
     }
 }
