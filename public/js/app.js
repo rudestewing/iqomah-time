@@ -37236,7 +37236,10 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  { staticClass: "text-center text-gray-200 text-xs pb-3" },
+                  {
+                    staticClass:
+                      "text-center text-gray-200 text-xs pb-3 tw-text-xs"
+                  },
                   [
                     _vm._v(
                       "\n                    Data berdasarkan hasil export dari "

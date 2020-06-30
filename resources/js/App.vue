@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-center text-gray-200 text-xs pb-3">
+                    <div class="text-center text-gray-200 text-xs pb-3 tw-text-xs">
                         Data berdasarkan hasil export dari <a href="https://jadwalsholat.pkpu.or.id/export.php"> https://jadwalsholat.pkpu.or.id/export.php </a>
                     </div>
                 </div>
