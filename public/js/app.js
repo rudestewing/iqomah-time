@@ -2298,12 +2298,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2352,6 +2346,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
   },
   methods: {
+    reloadPage: function reloadPage() {
+      window.location.reload();
+    },
     enterFullScreen: function enterFullScreen() {
       this.$refs.wrapper.requestFullscreen();
     },
@@ -37123,7 +37120,7 @@ var render = function() {
                           "tw-flex tw-justify-between tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg"
                       },
                       [
-                        _c("div", { staticClass: "tw-w-full lg:tw-w-8/12" }, [
+                        _c("div", { staticClass: "tw-w-full" }, [
                           _c("p", { staticClass: "tw-text-5xl" }, [
                             _vm._v(
                               "\n                                    " +
@@ -37131,10 +37128,6 @@ var render = function() {
                                 "\n                                "
                             )
                           ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: " tw-w-full lg:tw-w-4/12" }, [
-                          _c("p", { staticClass: "text-right" })
                         ])
                       ]
                     ),
@@ -37227,6 +37220,16 @@ var render = function() {
                             on: { click: _vm.enterFullScreen }
                           },
                           [_c("i", { staticClass: "fas fa-expand" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "btn btn-md tw-bg-indigo-500 tw-text-gray-200",
+                            on: { click: _vm.reloadPage }
+                          },
+                          [_c("i", { staticClass: "fas fa-sync" })]
                         )
                       ])
                     ],

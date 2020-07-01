@@ -8,14 +8,9 @@
                     <div class="tw-flex tw-flex-wrap">
                         <div class="tw-w-full tw-p-5 lg:tw-w-8/12">
                             <div class="tw-flex tw-justify-between tw-px-5 tw-bg-teal-800 tw-text-white tw-font-bold tw-rounded-lg">
-                                <div class="tw-w-full lg:tw-w-8/12">
+                                <div class="tw-w-full">
                                     <p class="tw-text-5xl">
                                         {{currentDateString}}
-                                    </p>
-                                </div>
-                                <div class=" tw-w-full lg:tw-w-4/12">
-                                    <p class="text-right">
-                                        <!-- {{city || city.name}} -->
                                     </p>
                                 </div>
                             </div>
@@ -41,12 +36,11 @@
                         </div>
                         <div class="tw-w-full tw-p-5 lg:tw-w-4/12 ">
                             <div class="tw-mb-3" v-for="(scheduleTime, index) in todayScheduleTimes" :key="index">
-                                <app-time-item 
-                                    :scheduleTime="scheduleTime"
-                                ></app-time-item>
+                                <app-time-item :scheduleTime="scheduleTime"></app-time-item>
                             </div>
                             <div>
                                 <button @click="enterFullScreen" class="btn btn-md tw-bg-indigo-700 tw-text-gray-200"> <i class="fas fa-expand"></i></button>
+                                <button @click="reloadPage" class="btn btn-md tw-bg-indigo-500 tw-text-gray-200"> <i class="fas fa-sync"></i></button>
                             </div>
                         </div>
                     </div>
@@ -118,6 +112,9 @@ export default {
     },
 
     methods: {
+        reloadPage() {
+            window.location.reload();
+        },
         enterFullScreen() {
             this.$refs.wrapper.requestFullscreen();
         },
