@@ -2133,11 +2133,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       upcomingTime: null,
       reminderUpcomingTime: false,
       spareAlert: 20,
-      maxTimeStamp: 0,
-      minTimeStamp: 0,
+      maxTimestamp: 0,
+      minTimestamp: 0,
       background: null,
       sliders: []
     };
+  },
+  watch: {
+    currentTimestamp: function currentTimestamp(newVal, oldVal) {
+      console.log(newVal, oldVal);
+      console.log(this.maxTimestamp, this.minTimestamp);
+
+      if (newVal > this.maxTimestamp || newVal < this.minTimestamp) {
+        console.log('new ahahah');
+        this.restartService();
+      }
+    }
   },
   computed: {
     currentTimeString: function currentTimeString() {
@@ -2202,12 +2213,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     startService: function startService() {
+      console.log('service start');
       this.findCity();
       this.getBackground();
       this.getHomeSliders();
-    },
-    stopService: function stopService() {
-      this.stopCounting();
     },
     findCity: function findCity() {
       var _this3 = this;
@@ -2240,7 +2249,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var response, data;
+        var response, data, todayDateString;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -2255,10 +2264,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   dateTime: moment__WEBPACK_IMPORTED_MODULE_2___default()()
                 };
                 _this4.todayScheduleTimes = data.data;
+                todayDateString = moment__WEBPACK_IMPORTED_MODULE_2___default()(_this4.today.dateTime).format('DD MMMM yyyy');
+                _this4.minTimestamp = moment__WEBPACK_IMPORTED_MODULE_2___default()("".concat(todayDateString, " 00:00:00"), 'DD MMMM yyyy HH:mm:ss').unix();
+                _this4.maxTimestamp = moment__WEBPACK_IMPORTED_MODULE_2___default()("".concat(todayDateString, " 23:59:59"), 'DD MMMM yyyy HH:mm:ss').unix();
 
                 _this4.startCounting();
 
-              case 7:
+              case 10:
               case "end":
                 return _context4.stop();
             }
@@ -2268,7 +2280,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     setCurrentTimestamp: function setCurrentTimestamp() {
       var value = moment__WEBPACK_IMPORTED_MODULE_2___default()().unix();
-      console.log(value);
       this.currentTimestamp = value;
     },
     findUpcoming: function findUpcoming() {
@@ -2280,7 +2291,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var data = Array.from(this.todayScheduleTimes).find(function (item, index) {
         return self.currentTimestamp <= item.epoch;
       });
-      console.log(data);
 
       if (data) {
         this.upcomingTime = data;
@@ -2308,7 +2318,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (data) {
         var gap = this.currentTimestamp - data.epoch;
         var distance = data.epoch + this.spareIqomah - this.currentTimestamp;
-        console.log(gap, distance);
 
         if (distance > 0 && data.time.is_iqomah == 1) {
           this.isIqomah = true;
@@ -2327,7 +2336,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }, 1000);
     },
     stopCounting: function stopCounting() {
+      console.log('stop counting');
       clearInterval(this.interval);
+    },
+    restartService: function restartService() {
+      console.log('service restart');
+      this.stopCounting();
+      this.startService();
     }
   },
   mounted: function mounted() {

@@ -88,11 +88,23 @@ export default {
 
             spareAlert: 20,
 
-            maxTimeStamp: 0,
-            minTimeStamp: 0,
+            maxTimestamp: 0,
+            minTimestamp: 0,
 
             background: null,
             sliders: [],
+        }
+    },
+
+    watch: {
+        currentTimestamp: function(newVal, oldVal) {
+            console.log(newVal, oldVal);
+            console.log(this.maxTimestamp, this.minTimestamp);
+
+            if(newVal > this.maxTimestamp  || newVal < this.minTimestamp ) {
+                console.log('new ahahah');
+                this.restartService();
+            }
         }
     },
 
@@ -125,12 +137,10 @@ export default {
         },
 
         startService() {
+            console.log('service start');
             this.findCity();
             this.getBackground();
             this.getHomeSliders();
-        },
-        stopService() {
-            this.stopCounting();
         },
 
         async findCity() {
@@ -150,12 +160,16 @@ export default {
             };
 
             this.todayScheduleTimes = data.data;
+
+            var todayDateString = moment(this.today.dateTime).format('DD MMMM yyyy');
+
+            this.minTimestamp = moment(`${todayDateString} 00:00:00`, 'DD MMMM yyyy HH:mm:ss').unix();
+            this.maxTimestamp = moment(`${todayDateString} 23:59:59`, 'DD MMMM yyyy HH:mm:ss').unix();
             this.startCounting();
         },
 
         setCurrentTimestamp() {
             var value = moment().unix();
-            console.log(value);
             this.currentTimestamp = value;
         },
 
@@ -169,8 +183,6 @@ export default {
             var data = Array.from(this.todayScheduleTimes).find((item, index) => {
                 return self.currentTimestamp <= item.epoch;
             });
-
-            console.log(data);
 
             if(data) {
                 this.upcomingTime = data;
@@ -202,8 +214,6 @@ export default {
                 var gap = this.currentTimestamp - data.epoch;
                 
                 var distance = (data.epoch + this.spareIqomah) - this.currentTimestamp;
-                
-                console.log(gap, distance);
 
                 if(distance > 0 && data.time.is_iqomah == 1) {
                     this.isIqomah = true;
@@ -225,8 +235,15 @@ export default {
         },
 
         stopCounting() {
+            console.log('stop counting');
             clearInterval(this.interval);
         },
+
+        restartService() {
+            console.log('service restart');
+            this.stopCounting();
+            this.startService();
+        }
     },
 
     mounted() {
